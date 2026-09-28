@@ -111,7 +111,13 @@ function App(){
             <div className="dance-info">
               <h3>{d.name}</h3><p>{d.desc}</p>
               <div className="meta"><span><Clock3 size={15}/>{d.duration}</span><span><CalendarDays size={15}/>{d.days}</span></div>
-              <div className="price-row"><div><small>Starting from</small><strong>₹{d.price.toLocaleString("en-IN")}<i>/month</i></strong></div><button onClick={()=>setSelected(d)}>View class <ArrowRight size={16}/></button></div>
+              <div className="price-row"><div><small>Starting from</small><strong>₹{d.price.toLocaleString("en-IN")}<i>/month</i></strong></div><button onClick={()=>{
+  window.gtag?.('event', 'dance_selected', {
+    dance_name: d.name,
+    dance_category: d.category
+  });
+  setSelected(d);
+}}>View class <ArrowRight size={16}/></button></div>
             </div>
           </article>)}
         </div>
