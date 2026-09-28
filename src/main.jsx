@@ -142,7 +142,14 @@ function App(){
         <div className="modal-emoji">{selected.emoji}</div><div className="eyebrow">{selected.category}</div><h2>{selected.name}</h2><p>{selected.desc}</p>
         <div className="modal-stats"><div><Clock3/><b>{selected.duration}</b><small>per class</small></div><div><CalendarDays/><b>{selected.days}</b><small>schedule</small></div><div><Sparkles/><b>₹{selected.price.toLocaleString("en-IN")}</b><small>starting / month</small></div></div>
         <label>Choose level<select value={level==="All"?"Beginner":level} onChange={e=>setLevel(e.target.value)}><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></label>
-        <button className="primary full" onClick={()=>{setBooking(selected);setSelected(null)}}>Book a trial / class <ArrowRight size={18}/></button>
+       <button className="primary full" onClick={()=>{
+  window.gtag?.('event', 'booking_started', {
+    dance_name: selected.name,
+    dance_category: selected.category
+  });
+  setBooking(selected);
+  setSelected(null);
+}}>Book a trial / class <ArrowRight size={18}/></button>
       </div>
     </div>}
 
