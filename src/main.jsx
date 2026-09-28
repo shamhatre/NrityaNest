@@ -159,7 +159,12 @@ function App(){
         {!booked ? <><div className="success-icon">💗</div><h2>Reserve your spot</h2><p>You're booking <b>{booking.name}</b>. This demo form doesn't take payment.</p>
           <input className="form-input" placeholder="Your name"/><input className="form-input" placeholder="Email or phone"/>
           <select className="form-input" defaultValue="Beginner"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select>
-          <button className="primary full" onClick={()=>setBooked(true)}>Confirm booking <CheckCircle2 size={18}/></button>
+        <button className="primary full" onClick={()=>{
+  window.gtag?.('event', 'booking_completed', {
+    dance_name: booking.name
+  });
+  setBooked(true);
+}}>Confirm booking <CheckCircle2 size={18}/></button>
         </> : <><div className="success-icon">🎉</div><h2>You're on the list!</h2><p>We've saved your demo booking for <b>{booking.name}</b>.</p><button className="primary full" onClick={()=>{setBooking(null);setBooked(false)}}>Done</button></>}
       </div>
     </div>}
